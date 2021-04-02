@@ -35,7 +35,7 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Category c1 = new Category(null, "Eletronics");
 		Category c2 = new Category(null, "Books");
-		Category c3 = new Category(null, "Software");
+		Category c3 = new Category(null, "Computers");
 		categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
 
 		Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
@@ -43,6 +43,13 @@ public class TestConfig implements CommandLineRunner {
 		Product p3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
 		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
 		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+		p1.getCategories().add(c2);
+		p2.getCategories().add(c1);
+		p3.getCategories().addAll(Arrays.asList(c1, c3));
+		p4.getCategories().addAll(Arrays.asList(c1, c3));
+		p5.getCategories().add(c2);
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
 		User u1 = new User(null, "mayk", "mayk@gmail.com", "1234", "3333");
