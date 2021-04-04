@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_payment")
@@ -21,6 +24,7 @@ public class Payment implements Serializable {
 	private Instant instant;
 	
 	@OneToOne
+	@MapsId
 	private Order order;
 	
 	public Payment() {}
@@ -47,7 +51,7 @@ public class Payment implements Serializable {
 	public void setInstant(Instant instant) {
 		this.instant = instant;
 	}
-
+	@JsonIgnore
 	public Order getOrder() {
 		return order;
 	}
